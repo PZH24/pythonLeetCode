@@ -26,8 +26,8 @@ def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
     while l1 is not None or l2 is not None:
         x = l1.val
         y = l2.val
-        sum_num = carry+x+y
-        carry = sum_num/10
+        sum_num = carry + x + y
+        carry = sum_num / 10
         curr.next = ListNode(sum_num % 10)
         curr = curr.next
         if l1 is not None:
@@ -39,21 +39,21 @@ def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
     return dummy_head.next
 
 
-def addTwoNumbers2(self, l1: ListNode, l2: ListNode) -> ListNode:  # 这是返回的数据结构
+def addTwoNumbers2( l1: ListNode, l2: ListNode) -> ListNode:  # 这是返回的数据结构
     if l1 is None and l2 is None:
         return ListNode(0)
     elif l1 is None or l2 is None:
         return l1 if l1 is not None else l2
     else:
         l3 = ListNode(0)
-        if(l1.val+l2.val)<10:
-            l3 = ListNode(l1.val+l2.val)
+        if (l1.val + l2.val) < 10:
+            l3 = ListNode(l1.val + l2.val)
             l3.next = addTwoNumbers2(l1.next, l2.next)
         else:
-            l3 =  ListNode((l1.val+l2.val)-10)
-            l3.next =  addTwoNumbers2(l2.next,  ListNode(1))
+            l3 = ListNode(l1.val + l2.val - 10)
+            l3.next = addTwoNumbers2(l1.next, addTwoNumbers(l2.next, ListNode(1)))
         return l3
 
 
 if __name__ == "__main__":
-    addTwoNumbers(ListNode(243), ListNode(564))
+    print(addTwoNumbers2( ListNode(243), ListNode(564)))
